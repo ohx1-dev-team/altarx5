@@ -1,2 +1,1 @@
-pls give credit if you fork this!
-help is appreciated!
+A chat platform online, using a six-digit code to authorize connections.
