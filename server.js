@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 /* ======================
 STATIC FILES
 ====================== */
-app.use(express.static(".public"));
+app.use(express.static("public"));
 
 /* ======================
 CHAT ROOM SYSTEM
