@@ -55,7 +55,7 @@ html, body {
   flex-direction: column;
 }
 
-/* 🔥 FIXED MESSAGE SIZING */
+/* 🔥 MESSAGE STYLING WITH TIMESTAMP SUPPORT */
 .message {
   display: inline-block;
   max-width: 70%;
@@ -64,16 +64,39 @@ html, body {
   border-radius: 8px;
   background-color: var(--accent-color);
   color: white;
-  word-break: break-word;          /* better than word-wrap */
+  word-break: break-word;
   white-space: pre-wrap;
   line-height: 1.3;
   box-shadow: 2px 2px 0px rgba(0,0,0,0.4);
-  align-self: flex-start;
+  align-self: flex-start; /* Default: Left side */
 }
 
 .message.self {
   background-color: var(--self-color);
-  align-self: flex-end;
+  align-self: flex-end; /* Self messages: Right side */
+}
+
+/* Content wrapper inside the message bubble */
+.message .message-content {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Small timestamp below the message */
+.message .timestamp {
+  font-size: 0.65rem;       /* Very small text */
+  color: var(--muted-text);
+  display: block;
+  margin-top: 2px;
+  text-align: right;         /* Aligned right for incoming messages */
+  opacity: 0.8;
+}
+
+/* Align timestamp to the left for self messages */
+.message.self .timestamp {
+  text-align: left;
 }
 
 .system-message {
@@ -146,5 +169,9 @@ a:hover {
 
   input#message, input, button {
     width: 100%;
+  }
+  
+  .message {
+    max-width: 85%;
   }
 }

@@ -126,21 +126,50 @@ socket.on('systemMessage', (text) => {
 });
 
 /* =========================
-   MESSAGE RENDERING
+   MESSAGE RENDERING (UPDATED FOR TIMESTAMPS)
 ========================= */
 
 function addMessageToScreen(msg) {
   const chat = document.getElementById('chat');
 
+  // 1. Create the main message container
   const msgDiv = document.createElement('div');
   msgDiv.classList.add('message');
 
+  // Determine if it's the current user's message
   if (msg.name === userName) {
     msgDiv.classList.add('self');
   }
 
-  msgDiv.textContent = `${msg.name} [${msg.time}]: ${msg.message}`;
+  // 2. Create the content wrapper (for the username and text)
+  const contentDiv = document.createElement('div');
+  contentDiv.classList.add('message-content');
+  
+  // Format: "Name: Message Text"
+  contentDiv.textContent = `${msg.name}: ${msg.message}`;
 
+  // 3. Create the timestamp
+  const timeDiv = document.createElement('div');
+  timeDiv.classList.add('timestamp');
+  
+  // Use the server time if available, otherwise use current local time
+  let timeString = '';
+  if (msg.time) {
+    const date = new Date(msg.time);
+    // Format: "HH:MM AM/PM"
+    timeString = date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  } else {
+    const now = new Date();
+    timeString = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  }
+  
+  timeDiv.textContent = timeString;
+
+  // 4. Assemble the elements
+  msgDiv.appendChild(contentDiv);
+  msgDiv.appendChild(timeDiv);
+  
+  // Add to chat
   chat.appendChild(msgDiv);
 
   // Keep only last 50 messages
@@ -148,6 +177,7 @@ function addMessageToScreen(msg) {
     chat.removeChild(chat.firstChild);
   }
 
+  // Scroll to bottom
   chat.scrollTop = chat.scrollHeight;
 }
 
