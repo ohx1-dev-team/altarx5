@@ -65,11 +65,16 @@ io.on("connection", (socket) => {
     const room = rooms[code];
     if (!room) return;
 
-    const msg = {
-      name,
-      message,
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    };
+ const msg = {
+  name,
+  message,
+  // Example: Force display to 'America/New_York' regardless of server location
+  time: new Date().toLocaleTimeString('en-US', { 
+    hour: '2-digit', 
+    minute: '2-digit',
+    timeZone: 'America/Los_Angeles' // Replace with desired IANA timezone
+  })
+};
 
     room.messages.push(msg);
     io.to(code).emit("newMessage", msg);
