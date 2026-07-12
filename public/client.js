@@ -157,10 +157,10 @@ function addMessageToScreen(msg) {
   if (msg.time) {
     const date = new Date(msg.time);
     // Format: "HH:MM AM/PM"
-    timeString = date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    timeString = date.toLocaleTimeString([], { hour: '2-dight', minute: '2-digit' });
   } else {
     const now = new Date();
-    timeString = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
   
   timeDiv.textContent = timeString;
