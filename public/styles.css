@@ -90,13 +90,13 @@ html, body {
   color: var(--muted-text);
   display: block;
   margin-top: 2px;
-  text-align: right;         /* Aligned right for incoming messages */
+  text-align: left;         /* Aligned right for incoming messages */
   opacity: 0.8;
 }
 
 /* Align timestamp to the left for self messages */
 .message.self .timestamp {
-  text-align: left;
+  text-align: right;
 }
 
 .system-message {
