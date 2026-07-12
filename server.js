@@ -19,7 +19,10 @@ const rooms = {};
 function generateRoomCode() {
   let code;
   do {
-    code = Math.floor(99999 + Math.random() * 999999).toString(); //code generation needs to be improved!!!!
+    // Generate a random integer between 0 and 999,999
+    const randomNumber = Math.floor(Math.random() * 1000000);
+    // Convert to string and pad with leading zeros to ensure length is 6
+    code = randomNumber.toString().padStart(6, '0');
   } while (rooms[code]);
   return code;
 }
