@@ -156,8 +156,19 @@ function addMessageToScreen(msg) {
   let timeString = '';
   if (msg.time) {
     const date = new Date(msg.time);
-    // Format: "HH:MM AM/PM"
-    timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+    if (!isNaN(date.getTime())) {
+      timeString = date.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      });
+    } else {
+      timeString = new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      });
+    }    
   } else {
     const now = new Date();
     timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
